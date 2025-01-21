@@ -1,0 +1,10 @@
+seqsight_4096_512_15M-at
+seqsight_4096_512_28M-at
+seqsight_4096_512_47M-at
+seqsight_4096_512_89M-at
+seqsight_4096_512_23M-at-xsmall
+seqsight_8192_512_25M-at-xsmall
+seqsight_16384_512_28M-at-xsmall
+seqsight_32768_512_34M-at-xsmall
+seqsight_65536_512_47M-at-xsmall
+seqsight_4096_512_89M-at-base
