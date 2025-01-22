@@ -1,0 +1,2 @@
+nucleotide-transformer-v2-100m-multi-species
+nucleotide-transformer-v2-50m-multi-species
