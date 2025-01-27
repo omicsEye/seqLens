@@ -3,6 +3,8 @@
 This repository contains the code for the `seqsight` project, which is a study to build DNA language models.
 
 ## Overview
+![](https://github.com/omicsEye/seqsight/blob/main/visualizations/plots/png/fig1_wide.png)
+
 Our research introduces several key innovations in DNA sequence modeling. We gathered two different pre-training datasets consisting of:
 - 19,551 reference genomes with over 18,000 prokaryote genomes (over 115B nucleotides)
 - A more balanced dataset composed of 1,355 prokaryote and eukaryote reference genomes (over 180B nucleotides)
@@ -41,7 +43,7 @@ The following visualization shows how fine-tuning methods affect the performance
 
 
 ## Usage
-You can use these models for your own research or utilize the provided scripts to train your own models.
+You can use these models for your research or use the provided scripts to train your models.
 
 ```python
 # Load model directly
@@ -69,5 +71,5 @@ If you use `seqsight` in your research, please cite our work:
 This project is licensed under the MIT License.
 
 ## Contact
-For any questions, feel free to reach out via email or open an issue in this repository.
+For any questions, feel free to email or open an issue in this repository.
 
