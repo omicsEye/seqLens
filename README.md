@@ -1,4 +1,4 @@
-# SeqSight
+# seqsight
 
 This repository contains the code for the `seqsight` project, which is a study to build DNA language models.
 
