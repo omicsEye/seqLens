@@ -36,7 +36,7 @@ In this repository, we include code for the following tasks:
 The following visualization shows how fine-tuning methods affect the performance of the models in vector representations:
 <p align="center">
   <img src="https://github.com/omicsEye/seqsight/blob/main/visualizations/plots/gif/fourkingdoms_cls.gif" alt="Fine-tuning Effect" width="45%">
-  <img src="https://github.com/omicsEye/seqsight/blob/main/visualizations/plots/gif/plasmids_cls.gif.gif" alt="Fine-tuning Effect" width="45%">
+  <img src="https://github.com/omicsEye/seqsight/blob/main/visualizations/plots/gif/plasmids_cls.gif" alt="Fine-tuning Effect" width="45%">
 </p>
 
 
