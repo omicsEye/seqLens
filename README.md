@@ -34,7 +34,11 @@ In this repository, we include code for the following tasks:
 ![Benchmarking Results](https://github.com/omicsEye/seqsight/blob/main/visualizations/plots/png/nt_esm_vs_deberta.png)
 
 The following visualization shows how fine-tuning methods affect the performance of the models in vector representations:
-![Fine-tuning Effect](https://github.com/omicsEye/seqsight/blob/main/visualizations/plots/gif/fourkingdoms_cls.gif) ![Fine-tuning Effect](https://github.com/omicsEye/seqsight/blob/main/visualizations/plots/gif/plasmids_cls.gif)
+<p align="center">
+  <img src="https://github.com/omicsEye/seqsight/blob/main/visualizations/plots/gif/fourkingdoms_cls.gif" alt="Fine-tuning Effect" width="45%">
+  <img src="https://github.com/omicsEye/seqsight/blob/main/visualizations/plots/gif/plasmids_cls.gif.gif" alt="Fine-tuning Effect" width="45%">
+</p>
+
 
 ## Usage
 You can use these models for your own research or utilize the provided scripts to train your own models.
