@@ -26,7 +26,6 @@ These insights provide a foundation for optimizing model design and training in 
 ## Features
 In this repository, we include code for the following tasks:
 - [Pre-training](https://github.com/omicsEye/seqsight/tree/main/train)
-- [Fine-tuning](https://github.com/omicsEye/seqsight/tree/main/benchmarking)
 - [Benchmarking](https://github.com/omicsEye/seqsight/tree/main/benchmarking)
 - [Visualization](https://github.com/omicsEye/seqsight/tree/main/visualizations)
 - [Different pooling techniques for classification](https://github.com/omicsEye/seqsight/tree/main/classification_heads)
