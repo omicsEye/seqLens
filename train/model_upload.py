@@ -18,14 +18,14 @@ from accelerate.utils import ProjectConfiguration
 from accelerate import DistributedDataParallelKwargs
 
 
-tokenizer_source = 'mahdibaghbanzadeh/seqsight_4096_512_46M'
-model_ckpt='mahdibaghbanzadeh/seqsight_4096_512_46M'
+tokenizer_source = 'mahdibaghbanzadeh/seqLens_4096_512_46M'
+model_ckpt='mahdibaghbanzadeh/seqLens_4096_512_46M'
 
 tokenizer = AutoTokenizer.from_pretrained(tokenizer_source, trust_remote_code=True)
 
 config = AutoConfig.from_pretrained(model_ckpt, trust_remote_code=True)
 
-prefix = 'seqsight_4096_512_46M'
+prefix = 'seqLens_4096_512_46M'
 model_names =  [ prefix + "-" + suffix    for suffix in ['Ms', 'Me', 'Mp']]
 model = AutoModelForMaskedLM.from_config(config)
 for model_name in model_names:
