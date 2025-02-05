@@ -9,10 +9,10 @@ class TrainingArguments:
     """
 
     model_ckpt: Optional[str] = field(
-        default="mahdibaghbanzadeh/seqsight_4096_512_15M", metadata={"help": "Model name or path of model to be trained."}
+        default="mahdibaghbanzadeh/seqLens_4096_512_15M", metadata={"help": "Model name or path of model to be trained."}
     )
     save_dir: Optional[str] = field(
-        default="seqsight_4096_512_15M", metadata={"help": "Save dir where model repo is cloned and models updates are saved to."}
+        default="seqLens_4096_512_15M", metadata={"help": "Save dir where model repo is cloned and models updates are saved to."}
     )
     train_file: Optional[str] = field(
         default="/lustre/groups/rahlab/mbagh/complete_data/train.txt", metadata={"help": "Name or path of training dataset."}
@@ -212,7 +212,7 @@ class InitializationArguments:
     """
 
     tokenizer_name: Optional[str] = field(
-        default="/Users/mbagh/Library/CloudStorage/Box-Box/seqSightModels/tokenizer/MLM_4096_512", metadata={"help": "Tokenizer attached to model."}
+        default="/Users/mbagh/Library/CloudStorage/Box-Box/seqLensModels/tokenizer/MLM_4096_512", metadata={"help": "Tokenizer attached to model."}
     )
     coef: Optional[float] = field(default=1.0, metadata={"help": "Coefficient for initializing model. "
                                                                  "hidden_layer_size, num_attention_heads,"
@@ -230,5 +230,5 @@ class InitializationArguments:
     pad_token_id: int = 0
     position_biased_input: bool = False
     pos_att_type: Optional[List[str]] = "p2c|c2p"
-    model_prefix: Optional[str] = field(default="seqsight", metadata={"help": "Name of the created model."})
+    model_prefix: Optional[str] = field(default="seqLens", metadata={"help": "Name of the created model."})
     push_to_hub: Optional[bool] = field(default=True, metadata={"help": "Push saved tokenizer to the hub."})

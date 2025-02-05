@@ -52,7 +52,7 @@ model_ckpt = f"omicseye/{model_id}"
 
 # model_ckpt = f"InstaDeepAI/{model_id}"
 if model_ckpt.endswith("-at-base-nt"):
-    tokenizer_source = "omicseye/seqsight_4096_512_89M-at-base"
+    tokenizer_source = "omicseye/seqLens_4096_512_89M-at-base"
 else:
     tokenizer_source = model_ckpt
 # Load the tokenizer
