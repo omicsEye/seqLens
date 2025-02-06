@@ -156,7 +156,7 @@ model_performance_all <- ggplot(
     legend.text = element_text(size = 7),
     axis.title = element_text(size = 8),
     axis.line = element_line(linewidth = 0.05),
-    legend.position = c(0.79, 0.08), # Place the legend at the bottom
+    legend.position = c(0.82, 0.07), # Place the legend at the bottom
     legend.spacing.y = unit(0.1, "cm"),
     legend.spacing.x = unit(0.1, "cm"),
     legend.box = "vertical", # Arrange legends horizontally
@@ -328,8 +328,7 @@ cl_models <- c(
 )
 df_cl <- all_data %>%
   filter(
-    model %in% cl_models,
-    metric == "eval_mcc"
+    model %in% cl_models
   )
 df_cl$model_n <- ifelse(df_cl$model == "nt_50_conv", "Concat",
   ifelse(df_cl$model == "nt_50_max", "Max",
@@ -383,11 +382,11 @@ p_cl_box = ggplot(
   )+theme(
     axis.text.x = element_blank(),
     axis.title.x = element_blank(),
-    legend.position = c(.9, 0.15),
+    legend.position = c(.8, 0.15),
     axis.ticks.x = element_blank(),
-    axis.line.x = element_line(size = 0.1),
-    axis.line.y = element_line(size = 0.1),
-    axis.ticks.y = element_line(size = 0.1)
+    axis.line.x = element_line(size = 0.15),
+    axis.line.y = element_line(size = 0.15),
+    axis.ticks.y = element_line(size = 0.15)
   ) 
 
 ggsave(
@@ -454,14 +453,17 @@ p_cl_time <- ggplot(
     axis.title.x = element_blank(),
     panel.grid.major.y = element_line(colour = "gray", linewidth = 0.1),
     panel.grid.minor.y = element_line(colour = "gray", linewidth = 0.05),
-    panel.grid.major.x = element_line(colour = "gray", linewidth = 0.05)
+    panel.grid.major.x = element_line(colour = "gray", linewidth = 0.05),
+    axis.line.x = element_line(size = 0.15),
+    axis.line.y = element_line(size = 0.15),
+    axis.ticks.y = element_line(size = 0.15),
+    axis.ticks.x = element_line(size = 0.15)
+
   ) +
   labs(
     y = "Average samples per second (± SE)",
     fill = "Pooling method"
-  )
-
-p_cl_time <- p_cl_time + 
+  ) + 
   ggforce::facet_row(vars(group_data), scales = "free", space = "free") +
   theme(legend.position = "none")
 
@@ -553,9 +555,9 @@ p_cpt = ggplot(
     axis.title.x = element_blank(),
     legend.position = c(.8, 0.15),
     axis.ticks.x = element_blank(),
-    axis.line.x = element_line(size = 0.1),
-    axis.line.y = element_line(size = 0.1),
-    axis.ticks.y = element_line(size = 0.1)
+    axis.line.x = element_line(size = 0.15),
+    axis.line.y = element_line(size = 0.15),
+    axis.ticks.y = element_line(size = 0.15)
   ) 
 
 
@@ -581,43 +583,10 @@ deb_models <- c(
 )
 df_deb <- all_data %>%
   filter(
-    model %in% deb_models,
-    metric == "eval_mcc"
+    model %in% deb_models
   )
 
 df_deb$model <- factor(df_deb$model, levels = deb_models)
-p <- ggboxplot(
-  df_deb %>%
-    filter(
-      metric == "eval_mcc",
-      evaluation_set == "validation"
-    ),
-  x = "model", y = "score",
-  color = "model", palette = "jco",
-  add = "jitter", facet.by = "dataset",
-  scales = "free_y",
-  add.params = list(size = 0.5, alpha = 0.5)
-) +
-  geom_point(
-    data = df_deb %>%
-      filter(metric == "eval_mcc", evaluation_set == "test"),
-    aes(x = model, y = score, color = model),
-    # color = "red",       # Customize point color
-    size = 2, # Customize point size
-    shape = 17 # Customize point shape (e.g., triangle)
-  ) +
-  omicsArt::theme_omicsEye() +
-  theme(
-    axis.text.x = element_blank(),
-    axis.title.x = element_blank(),
-    legend.position = c(.8, 0.15),
-    axis.ticks.x = element_blank()
-  ) +
-  guides(color = guide_legend(nrow = 7)) +
-  labs(
-    y = "MCC",
-    color = "Model Type"
-  )
 
 p_4096_deberta = ggplot(
   df_deb %>%
@@ -661,9 +630,9 @@ p_4096_deberta = ggplot(
     axis.title.x = element_blank(),
     legend.position = c(.75, 0.15),
     axis.ticks.x = element_blank(),
-    axis.line.x = element_line(size = 0.1),
-    axis.line.y = element_line(size = 0.1),
-    axis.ticks.y = element_line(size = 0.1)
+    axis.line.x = element_line(size = 0.15),
+    axis.line.y = element_line(size = 0.15),
+    axis.ticks.y = element_line(size = 0.15)
   ) 
 
 ggsave(
@@ -681,6 +650,8 @@ df_deb <- all_data %>%
     model %in% deb_models,
     metric == "eval_samples_per_second"
   )
+
+df_deb$model <- factor(df_deb$model, levels = deb_models)
 
 # Calculate mean and standard error for each group
 df_deb_summary <- df_deb %>%
@@ -717,7 +688,11 @@ p_deb_time <- ggplot(
     axis.title.x = element_blank(),
     panel.grid.major.y = element_line(colour = "gray", linewidth = 0.1),
     panel.grid.minor.y = element_line(colour = "gray", linewidth = 0.05),
-    panel.grid.major.x = element_line(colour = "gray", linewidth = 0.05)
+    panel.grid.major.x = element_line(colour = "gray", linewidth = 0.05),
+    axis.line.x = element_line(size = 0.15),
+    axis.line.y = element_line(size = 0.15),
+    axis.ticks.y = element_line(size = 0.15),
+    axis.ticks.x = element_line(size = 0.15)
   ) +
   labs(
     y = "Average samples per second (± SE)",
@@ -852,9 +827,9 @@ for (i in 1:3) {
     axis.title.x = element_blank(),
     legend.position = c(.75, 0.15),
     axis.ticks.x = element_blank(),
-    axis.line.x = element_line(size = 0.1),
-    axis.line.y = element_line(size = 0.1),
-    axis.ticks.y = element_line(size = 0.1)
+    axis.line.x = element_line(size = 0.15),
+    axis.line.y = element_line(size = 0.15),
+    axis.ticks.y = element_line(size = 0.15)
   ) 
 
   ggsave(
@@ -910,7 +885,11 @@ for (i in 1:3) {
       axis.title.x = element_blank(),
       panel.grid.major.y = element_line(colour = "gray", linewidth = 0.1),
       panel.grid.minor.y = element_line(colour = "gray", linewidth = 0.05),
-      panel.grid.major.x = element_line(colour = "gray", linewidth = 0.05)
+      panel.grid.major.x = element_line(colour = "gray", linewidth = 0.05),
+      axis.line.x = element_line(size = 0.15),
+      axis.line.y = element_line(size = 0.15),
+      axis.ticks.y = element_line(size = 0.15),
+      axis.ticks.x = element_line(size = 0.15)
     ) +
     labs(
       y = "Average samples per second (± SE)",
@@ -960,8 +939,7 @@ tp_models <- c(
 
 df_tp <- all_data %>%
   filter(
-    model %in% tp_models,
-    metric == "eval_mcc"
+    model %in% tp_models
   )
 
 df_tp$model <- ifelse(df_tp$model == "nucleotide-transformer-v2-100m-multi-species", "NT-100",
@@ -1023,9 +1001,9 @@ p_comparison = ggplot(
     axis.title.x = element_blank(),
     legend.position = c(.75, 0.15),
     axis.ticks.x = element_blank(),
-    axis.line.x = element_line(size = 0.1),
-    axis.line.y = element_line(size = 0.1),
-    axis.ticks.y = element_line(size = 0.1)
+    axis.line.x = element_line(size = 0.15),
+    axis.line.y = element_line(size = 0.15),
+    axis.ticks.y = element_line(size = 0.15)
   )
 
 ggsave(
@@ -1038,14 +1016,9 @@ ggsave(
 )
 
 # time
-df_tp <- all_data %>%
-  filter(
-    model %in% tp_models,
-    metric == "eval_samples_per_second"
-  )
-
 # Calculate mean and standard error for each group
 df_tp_summary <- df_tp %>%
+filter(metric == "eval_samples_per_second") %>%
   group_by(model, dataset, metric, group_data) %>%
   summarise(
     score_mean = mean(score),
@@ -1079,7 +1052,11 @@ p_time <- ggplot(
     axis.title.x = element_blank(),
     panel.grid.major.y = element_line(colour = "gray", linewidth = 0.1),
     panel.grid.minor.y = element_line(colour = "gray", linewidth = 0.05),
-    panel.grid.major.x = element_line(colour = "gray", linewidth = 0.05)
+    panel.grid.major.x = element_line(colour = "gray", linewidth = 0.05),
+    axis.line.x = element_line(size = 0.15),
+    axis.line.y = element_line(size = 0.15),
+    axis.ticks.y = element_line(size = 0.15),
+    axis.ticks.x = element_line(size = 0.15)
   ) +
   labs(
     y = "Average samples per second (± SE)",
@@ -1115,6 +1092,7 @@ ggsave(
 ggsave(
   plot = merged_tp, filename = paste0(png_directory, "/nt_esm_vs_deberta_merged.png"),
   width = 7.2, height = 5.184, bg = "white")
+
 # LoRA
 lora_models <- c(
   "seqLens_4096_512_89M-at-base",
@@ -1184,9 +1162,9 @@ p_lora = ggplot(
     axis.title.x = element_blank(),
     legend.position = c(.75, 0.15),
     axis.ticks.x = element_blank(),
-    axis.line.x = element_line(size = 0.1),
-    axis.line.y = element_line(size = 0.1),
-    axis.ticks.y = element_line(size = 0.1)
+    axis.line.x = element_line(size = 0.15),
+    axis.line.y = element_line(size = 0.15),
+    axis.ticks.y = element_line(size = 0.15)
   )
 
 ggsave(
@@ -1203,7 +1181,17 @@ df_lora <- all_data %>%
     model %in% lora_models,
     metric == "eval_samples_per_second"
   )
-
+df_lora$model <- ifelse(df_lora$model == "nucleotide-transformer-v2-100m-multi-species", "NT-100",
+df_lora$model
+  )
+df_lora$model <- factor(df_lora$model,
+  levels = c(
+    "seqLens_4096_512_89M-at-base",
+  "seqLens_4096_512_89M-at-base-LoRA",
+  "NT-100",
+  "NT-100-LoRA"
+  )
+)
 # Calculate mean and standard error for each group
 df_lora_summary <- df_lora %>%
   group_by(model, dataset, metric, group_data) %>%
@@ -1239,7 +1227,11 @@ p_lora_time <- ggplot(
     axis.title.x = element_blank(),
     panel.grid.major.y = element_line(colour = "gray", linewidth = 0.1),
     panel.grid.minor.y = element_line(colour = "gray", linewidth = 0.05),
-    panel.grid.major.x = element_line(colour = "gray", linewidth = 0.05)
+    panel.grid.major.x = element_line(colour = "gray", linewidth = 0.05),
+    axis.line.x = element_line(size = 0.15),
+    axis.line.y = element_line(size = 0.15),
+    axis.ticks.y = element_line(size = 0.15),
+    axis.ticks.x = element_line(size = 0.15)
   ) +
   labs(
     y = "Average samples per second (± SE)",
@@ -1258,4 +1250,21 @@ ggsave(
 ggsave(
   plot = p_lora_time, filename = paste0(png_directory, "/lora_time.png"),
   width = 7.2, height = 1.728, bg = "white"
+)
+
+merged_lora = cowplot::plot_grid(p_lora, p_lora_time, nrow = 2,
+                               labels = c("a", "b"),
+                               rel_heights = c(2, 1),
+                               label_size = 8,
+                               label_x = 0.01,
+                               label_y = c(1,1.02))
+
+ggsave( 
+  plot = merged_lora, filename = paste0(pdf_directory, "/lora_merged.pdf"),
+  width = 7.2, height = 5.184
+)
+
+ggsave(
+  plot = merged_lora, filename = paste0(png_directory, "/lora_merged.png"),
+  width = 7.2, height = 5.184, bg = "white"
 )
