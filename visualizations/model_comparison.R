@@ -609,12 +609,12 @@ token_embeddings_plot = ggplot(token_embeddings, aes(x = x, y = y, color = facto
     aes(x = x, y = y), color = "purple", shape = 21,
     size = 1.5
   ) +
-  scale_color_jama() +
+  scale_color_simpsons() +
   omicsArt::theme_omicsEye() +
   guides(color = guide_legend(override.aes = list(alpha = 1, size = 1))) +
   labs(
-    y = "Y",
-    x = "X",
+    y = "UMAP 2",
+    x = "UMAP 1",
     color = "Token Length"
   )+
   theme(

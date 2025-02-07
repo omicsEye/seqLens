@@ -53,7 +53,7 @@ for suffix in suffix_list:
 
     # Split 'token_model' back into 'token' and 'model' components
     embedding_df[['token', 'model']] = embedding_df['token_model'].str.split('_', expand=True)
-
+    
     # Drop the 'token_model' column as it has been decomposed
     embedding_df.drop(columns=["token_model"], inplace=True)
 
