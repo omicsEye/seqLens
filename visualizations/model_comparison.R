@@ -570,6 +570,85 @@ ggsave(
   width = 7.2, height = 3.456
 )
 
+#read the token embeddings
+token_embeddings <- read.csv("token_embeddings.csv") %>%
+  data.frame()
+
+
+token_embeddings$token_len = nchar(token_embeddings$token)
+token_embeddings$model = ifelse(token_embeddings$model == "base", "seqLens_4096_512_46M",
+  ifelse(token_embeddings$model == "Ms", "seqLens_4096_512_46M-Ms",
+    ifelse(token_embeddings$model == "Mp", "seqLens_4096_512_46M-Mp",
+      "seqLens_4096_512_46M-Me"
+    ) 
+)
+)
+
+token_embeddings$model <- factor(token_embeddings$model, levels = c(
+  "seqLens_4096_512_46M-Me",
+  "seqLens_4096_512_46M-Mp",
+  "seqLens_4096_512_46M-Ms",
+  "seqLens_4096_512_46M"
+))
+
+token_embeddings_plot = ggplot(token_embeddings, aes(x = x, y = y, color = factor(token_len))) +
+  geom_point(size = 0.2, alpha = 0.2) +
+  coord_cartesian(clip = "off") +  # Ensure nothing gets clipped
+  facet_wrap(~model, nrow = 1) +
+  
+  # Annotate the points where token == "abcd"
+  geom_text(
+    data = token_embeddings %>% filter(token %in% c("aaagaa", "gaagcga", "gacgacca")),
+    aes(label = toupper(token)), 
+    vjust = -1, hjust = 0.5,
+    color = "black", fontface = "bold", size = 2
+  ) +
+  # add a larger circle highlight the points
+  geom_point(
+    data = token_embeddings %>% filter(token %in% c("aaagaa", "gaagcga", "gacgacca")),
+    aes(x = x, y = y), color = "purple", shape = 21,
+    size = 1.5
+  ) +
+  scale_color_jama() +
+  omicsArt::theme_omicsEye() +
+  guides(color = guide_legend(override.aes = list(alpha = 1, size = 1))) +
+  labs(
+    y = "Y",
+    x = "X",
+    color = "Token Length"
+  )+
+  theme(
+    legend.position = "right",
+    axis.ticks.x = element_blank(),
+    axis.line.x = element_line(size = 0.15),
+    axis.line.y = element_line(size = 0.15),
+    axis.ticks.y = element_line(size = 0.15)
+  )
+ggsave(
+  plot = token_embeddings_plot, filename = paste0(pdf_directory, "/token_embeddings.pdf"),
+  width = 7.2, height = 2
+)
+
+ggsave(
+  plot = token_embeddings_plot, filename = paste0(png_directory, "/token_embeddings.png"),
+  width = 7.2, height = 2, bg = "white"
+)
+
+#combined
+merged_cpt = cowplot::plot_grid(p_cpt, token_embeddings_plot, nrow = 2,
+                               labels = c("a", "b"),
+                               rel_heights = c(2, 1),
+                               label_size = 8,
+                               label_x = 0.01,
+                               label_y = c(1,1.02))
+
+ggsave(
+  plot = merged_cpt, filename = paste0(pdf_directory, "/cpt_embeddings.pdf"),
+  width = 7.2, height = 5.5
+)
+ggsave(
+  plot = merged_cpt, filename = paste0(png_directory, "/cpt_embeddings.png"),
+  width = 7.2, height = 5.5, bg = "white")
 
 # deberta architecture
 deb_models <- c(
