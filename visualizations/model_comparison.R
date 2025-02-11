@@ -600,7 +600,7 @@ token_embeddings_plot = ggplot(token_embeddings, aes(x = x, y = y, color = facto
   geom_text(
     data = token_embeddings %>% filter(token %in% c("aaagaa", "gaagcga", "gacgacca")),
     aes(label = toupper(token)), 
-    vjust = -1, hjust = 0.5,
+    vjust = 1.4, hjust = 0.3,
     color = "black", fontface = "bold", size = 2
   ) +
   # add a larger circle highlight the points
@@ -611,18 +611,19 @@ token_embeddings_plot = ggplot(token_embeddings, aes(x = x, y = y, color = facto
   ) +
   scale_color_simpsons() +
   omicsArt::theme_omicsEye() +
-  guides(color = guide_legend(override.aes = list(alpha = 1, size = 1))) +
+  guides(color = guide_legend(override.aes = list(alpha = 1, size = 1), nrow=1)) +
   labs(
     y = "UMAP 2",
     x = "UMAP 1",
     color = "Token Length"
   )+
   theme(
-    legend.position = "right",
+    legend.position = "top",
     axis.ticks.x = element_blank(),
     axis.line.x = element_line(size = 0.15),
     axis.line.y = element_line(size = 0.15),
-    axis.ticks.y = element_line(size = 0.15)
+    axis.ticks.y = element_line(size = 0.15),
+    axis.title = element_text(size = 8)
   )
 ggsave(
   plot = token_embeddings_plot, filename = paste0(pdf_directory, "/token_embeddings.pdf"),
@@ -634,13 +635,75 @@ ggsave(
   width = 7.2, height = 2, bg = "white"
 )
 
-#combined
-merged_cpt = cowplot::plot_grid(p_cpt, token_embeddings_plot, nrow = 2,
-                               labels = c("a", "b"),
-                               rel_heights = c(2, 1),
-                               label_size = 8,
-                               label_x = 0.01,
-                               label_y = c(1,1.02))
+
+# distance box-plot
+embedding_distances <- read.csv("token_distances.csv") %>%
+  select(-token) %>%
+  gather(key = "model", value = "value") %>%
+  data.frame()
+
+
+embedding_distances$model = ifelse(embedding_distances$model == "base", "seqLens_4096_512_46M",
+  ifelse(embedding_distances$model == "Ms", "seqLens_4096_512_46M-Ms",
+    ifelse(embedding_distances$model == "Mp", "seqLens_4096_512_46M-Mp",
+      "seqLens_4096_512_46M-Me"
+    ) 
+)
+)
+
+embedding_distances$model <- factor(embedding_distances$model, levels = c(
+  "seqLens_4096_512_46M-Me",
+  "seqLens_4096_512_46M-Mp",
+  "seqLens_4096_512_46M-Ms",
+  "seqLens_4096_512_46M"
+))
+
+distance_box_plot = ggplot(
+  embedding_distances ,
+  aes(x = model, y = value, color = model)
+) +
+  geom_boxplot(lwd = 0.2, 
+  outlier.size = 0.1, 
+  outlier.alpha = 0.05) +  # Match outliers to jitter points
+  geom_jitter(size = 0.1, alpha = 0.05) +  # Jittered points
+  coord_cartesian(clip = "off") + # Ensure nothing gets clipped
+ scale_color_manual(values = c("#2e2a2b", "#cf4e9c", "#8b57a2", "#358db9")) +
+  omicsArt::theme_omicsEye() +
+  guides(color = guide_legend(nrow = 4)) +
+  labs(
+    y = "Distance from seqLens_4096_512_46M",
+    color = "Model Type"
+  )+
+  theme(
+    axis.text.x = element_blank(),
+    axis.title.x = element_blank(),
+    legend.position = "none",
+    axis.ticks.x = element_blank(),
+    axis.line.x = element_line(size = 0.15),
+    axis.line.y = element_line(size = 0.15),
+    axis.ticks.y = element_line(size = 0.15)
+  ) 
+
+
+ggsave(
+  plot = distance_box_plot, 
+  filename = paste0(pdf_directory, "/embedding_distances.pdf"),
+  width = 2.4, height = 2.4
+)
+#combined cpt (first row), token_embeddings_plot and distance_box_plot (second row)
+bottom_row = cowplot::plot_grid(token_embeddings_plot, distance_box_plot, nrow = 1,
+                                labels = c("b", "c"),
+                                label_size = 8,
+                                label_x = c(0.01, -0.03),
+                                label_y = 1,
+                               rel_heights = c(1, 1),
+                               rel_widths = c(3, 1))
+merged_cpt = cowplot::plot_grid(p_cpt, bottom_row, nrow = 2,
+                                labels = c("a", ""),
+                                rel_heights = c(2, 1),
+                                label_size = 8,
+                                label_x = 0.01,
+                                label_y = c(1,1.02))
 
 ggsave(
   plot = merged_cpt, filename = paste0(pdf_directory, "/cpt_embeddings.pdf"),
