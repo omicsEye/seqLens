@@ -67,7 +67,9 @@ If you use `seqLens` in your research, please cite our work:
 ```
 
 ## License
-This project is licensed under the CC-BY-NC 4.0 License.
+This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International (CC-BY-NC 4.0) License.  
+Commercial use of this software or any related models may require a separate licensing agreement due to a pending patent.  
+For commercial inquiries, please contact Ali Rahnavard at rahnavard@gwu.edu.
 
 ## Contact
 For any questions, feel free to email or open an issue in this repository.
