@@ -619,11 +619,10 @@ token_embeddings_plot = ggplot(token_embeddings, aes(x = x, y = y, color = facto
   )+
   theme(
     legend.position = "top",
-    axis.ticks.x = element_blank(),
     axis.line.x = element_line(size = 0.15),
     axis.line.y = element_line(size = 0.15),
     axis.ticks.y = element_line(size = 0.15),
-    axis.title = element_text(size = 8)
+    axis.title = element_text(size = 6)
   )
 ggsave(
   plot = token_embeddings_plot, filename = paste0(pdf_directory, "/token_embeddings.pdf"),
@@ -664,19 +663,23 @@ distance_box_plot = ggplot(
 ) +
   geom_boxplot(lwd = 0.2, 
   outlier.size = 0.1, 
-  outlier.alpha = 0.05) +  # Match outliers to jitter points
-  geom_jitter(size = 0.1, alpha = 0.05) +  # Jittered points
+  outlier.alpha = 0.02) +  # Match outliers to jitter points
+  geom_jitter(size = 0.1, alpha = 0.02) +  # Jittered points
   coord_cartesian(clip = "off") + # Ensure nothing gets clipped
  scale_color_manual(values = c("#2e2a2b", "#cf4e9c", "#8b57a2", "#358db9")) +
   omicsArt::theme_omicsEye() +
   guides(color = guide_legend(nrow = 4)) +
   labs(
-    y = "Distance from seqLens_4096_512_46M",
-    color = "Model Type"
+    y = "Distance from 46M model",
+    color = "Model Type",
+    x = "Models"
   )+
+  scale_x_discrete(labels = c(expression("||M - Me||"[2]),
+                            expression("||M - Mp||"[2]),
+                            expression("||M - Ms||"[2])))+
   theme(
-    axis.text.x = element_blank(),
-    axis.title.x = element_blank(),
+    # axis.text.x = element_blank(),
+    axis.title = element_text(size = 6),
     legend.position = "none",
     axis.ticks.x = element_blank(),
     axis.line.x = element_line(size = 0.15),
