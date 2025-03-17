@@ -55,14 +55,16 @@ model = AutoModelForMaskedLM.from_pretrained("omicseye/seqLens_4096_512_89M-at-b
 ## Citation
 If you use `seqLens` in your research, please cite our work:
 ```
-@article{XXX,
-  author    = {XX},
-  title     = {XXX},
-  journal   = {XX},
-  year      = {XXX},
-  volume    = {XX},
-  number    = {X},
-  pages     = {XX},
+@article {seqLens,
+	author = {Baghbanzadeh, Mahdi and Mann, Brendan and Crandall, Keith A and Rahnavard, Ali},
+	title = {seqLens: optimizing language models for genomic predictions},
+	elocation-id = {2025.03.12.642848},
+	year = {2025},
+	doi = {10.1101/2025.03.12.642848},
+	publisher = {Cold Spring Harbor Laboratory},
+	URL = {https://www.biorxiv.org/content/early/2025/03/14/2025.03.12.642848},
+	eprint = {https://www.biorxiv.org/content/early/2025/03/14/2025.03.12.642848.full.pdf},
+	journal = {bioRxiv}
 }
 ```
 
