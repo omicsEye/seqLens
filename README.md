@@ -1,6 +1,6 @@
 # seqLens
 
-This repository contains the code for the `seqLens` project, which is a study to build DNA language models.
+This repository contains the code for the [`seqLens`](https://doi.org/10.1101/2025.03.12.642848) project, which is a study to build DNA language models.
 
 ## Overview
 ![](https://github.com/omicsEye/seqLens/blob/main/visualizations/plots/png/fig1_wide.png)
