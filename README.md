@@ -1,7 +1,7 @@
 # seqLens
 
 This repository contains the code for the [`seqLens` manuscript](https://doi.org/10.1101/2025.03.12.642848). In the `seqLens` project, we investigated genomics language models by implementing a set of DNA language models and benchmarked their efficiency.  
-HF repo: [omicseye](https://huggingface.co/omicseye)
+Hugging Face models: [omicseye/seqLens](https://huggingface.co/collections/omicseye/seqlens-67d1ff371d28e9ef2cacba63)
 
 `seqLens` manuscript preprint: https://doi.org/10.1101/2025.03.12.642848
 ## Overview
