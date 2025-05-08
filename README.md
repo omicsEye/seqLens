@@ -54,7 +54,7 @@ model = AutoModelForMaskedLM.from_pretrained("omicseye/seqLens_4096_512_89M-at-b
 ```
 
 ## Citation
-If you use `seqLens` in your research, please cite our work:
+If you use [`seqLens`](https://doi.org/10.1101/2025.03.12.642848) in your research, please cite our work:
 ```
 @article {seqLens,
 	author = {Baghbanzadeh, Mahdi and Mann, Brendan and Crandall, Keith A and Rahnavard, Ali},
