@@ -1,9 +1,9 @@
 # seqLens
 
-This repository contains the code for the [`seqLens` manuscript](https://doi.org/10.1101/2025.03.12.642848). In the `seqLens` project, we investigated genomics language models by implementing a set of DNA language models and benchmarked their efficiency.  
+This repository contains the code for the [`seqLens` manuscript](https://academic.oup.com/mbe/article/43/7/msag139/8715817). In the `seqLens` project, we investigated genomics language models by implementing a set of DNA language models and benchmarked their efficiency.  
 Hugging Face models: [omicseye/seqLens](https://huggingface.co/collections/omicseye/seqlens-67d1ff371d28e9ef2cacba63)
 
-`seqLens` manuscript preprint: https://doi.org/10.1101/2025.03.12.642848
+`seqLens` manuscript: [https://doi.org/10.1093/molbev/msag139](https://doi.org/10.1093/molbev/msag139)
 ## Overview
 ![](https://github.com/omicsEye/seqLens/blob/main/visualizations/plots/png/fig1_wide.png)
 
@@ -117,18 +117,21 @@ All `seqLens` models were trained on **NVIDIA Tesla V100 GPUs** using distribute
 - Distributed Training: HuggingFace Accelerate
 - Logging: TFLOPs, runtime, and iteration time tracked per step
 ## Citation
-If you use [`seqLens`](https://doi.org/10.1101/2025.03.12.642848) in your research, please cite our work:
+If you use `seqLens` in your research, please cite our work:
 ```
-@article {seqLens,
-	author = {Baghbanzadeh, Mahdi and Mann, Brendan and Crandall, Keith A and Rahnavard, Ali},
-	title = {seqLens: optimizing language models for genomic predictions},
-	elocation-id = {2025.03.12.642848},
-	year = {2025},
-	doi = {10.1101/2025.03.12.642848},
-	publisher = {Cold Spring Harbor Laboratory},
-	URL = {https://www.biorxiv.org/content/early/2025/03/14/2025.03.12.642848},
-	eprint = {https://www.biorxiv.org/content/early/2025/03/14/2025.03.12.642848.full.pdf},
-	journal = {bioRxiv}
+@article{Baghbanzadeh2026,
+  title = {seqLens: Optimizing Language Models for Genomic Predictions},
+  volume = {43},
+  ISSN = {1537-1719},
+  url = {http://dx.doi.org/10.1093/molbev/msag139},
+  DOI = {10.1093/molbev/msag139},
+  number = {7},
+  journal = {Molecular Biology and Evolution},
+  publisher = {Oxford University Press (OUP)},
+  author = {Baghbanzadeh,  Mahdi and Mann,  Brendan T and Crandall,  Keith A and Rahnavard,  Ali},
+  editor = {Tamura,  Koichiro},
+  year = {2026},
+  month = June 
 }
 ```
 
